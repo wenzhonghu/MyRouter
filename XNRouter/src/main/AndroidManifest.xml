@@ -1,0 +1,40 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xiaoniu.finance.router">
+
+    <application
+        android:allowBackup="false"
+        android:label="ARouter demo">
+        <activity
+            android:name=".SchemeFilterActivity"
+            android:permission="com.xiaoniu.dontuse">
+
+            <!-- Schame -->
+            <intent-filter>
+                <data
+                    android:host="xno.cn"
+                    android:scheme="xnoapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <!-- App Links -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="xno.cn"
+                    android:scheme="http" />
+                <data
+                    android:host="xno.cn"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

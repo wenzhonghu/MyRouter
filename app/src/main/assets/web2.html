@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .button {
+                height: 100px;
+                width: 30%;
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<h1 id="h">欢迎光临我的路由</h1>
+<button onclick="confirm('confirm')" class="button">confirm</button>
+<button onclick="alert('alert')" class="button">alert</button>
+<button onclick="prompt('prompt')" class="button">prompt</button>
+<button onclick="log()" class="button">log</button>
+<a href="http://www.baidu.com">baidu</a>
+</body>
+<script type="text/javascript">
+function log(){
+  console.log("console.log");
+  console.warn("warnning");
+  console.error("error");
+}
+</script>
+</html>

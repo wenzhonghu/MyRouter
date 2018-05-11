@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">XNRouter</string>
+    <string name="permission_denied">路由请求权限不足,请核查路由权限配置</string>
+</resources>
