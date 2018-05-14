@@ -21,6 +21,7 @@ import com.xiaoniu.finance.router.permission.PermissionType;
 public class FundActivity extends Activity {
 
     public static final int REQ_CODE = 100;
+    public static final int REQ_CODE1 = 101;
 
     public static void startMe(Context context, int code) {
         Intent intent = new Intent(context, FundActivity.class);
@@ -130,12 +131,27 @@ public class FundActivity extends Activity {
                 }
             }
         });
+
+        /**
+         * 简单的调用startActivityForResult
+         */
+        findViewById(R.id.btn5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                XnRouter.getInstance().from(FundActivity.this, new XnRouterRequest.Builder().build("/fixed/cross")
+                        .withInt("request", REQ_CODE1));
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQ_CODE && resultCode == Activity.RESULT_OK) {
+            Toast.makeText(this, data.getStringExtra("wen"), Toast.LENGTH_SHORT).show();
+        }
+
+        if (requestCode == REQ_CODE1 && resultCode == Activity.RESULT_OK) {
             Toast.makeText(this, data.getStringExtra("wen"), Toast.LENGTH_SHORT).show();
         }
     }

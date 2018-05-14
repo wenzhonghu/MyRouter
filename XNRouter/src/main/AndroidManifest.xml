@@ -3,9 +3,9 @@
 
     <application
         android:allowBackup="false"
-        android:label="ARouter demo">
+        android:label="A Scheme Router">
         <activity
-            android:name=".SchemeFilterActivity"
+            android:name=".SchemeRouterActivity"
             android:permission="com.xiaoniu.dontuse">
 
             <!-- Schame -->

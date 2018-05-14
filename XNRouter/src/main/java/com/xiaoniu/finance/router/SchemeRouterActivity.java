@@ -6,7 +6,10 @@ import android.os.Bundle;
 
 import com.xiaoniu.finance.router.core.XnRouterRequest;
 
-public class SchemeFilterActivity extends Activity {
+/**
+ * 处理uri模式的跳转功能
+ */
+public class SchemeRouterActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +18,7 @@ public class SchemeFilterActivity extends Activity {
         /**直接通过ARouter处理外部Uri*/
         Uri uri = getIntent().getData();
         XnRouterRequest.Builder builder = new XnRouterRequest.Builder().match(false).build(uri);
-        XnRouter.getInstance().from(SchemeFilterActivity.this, builder);
+        XnRouter.getInstance().from(SchemeRouterActivity.this, builder);
         finish();
     }
 }

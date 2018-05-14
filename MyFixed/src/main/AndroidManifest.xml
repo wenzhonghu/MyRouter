@@ -4,7 +4,11 @@
 
     <application>
         <activity android:name=".TestActivity" />
-        <activity android:name=".FixedResultActivity"></activity>
+        <activity android:name=".FixedResultActivity" />
+        <activity
+            android:name=".CrossActivity"
+            android:launchMode="singleTop"
+            android:process=":cross"></activity>
     </application>
 
 </manifest>

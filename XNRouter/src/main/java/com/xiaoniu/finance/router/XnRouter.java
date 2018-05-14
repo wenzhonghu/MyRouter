@@ -3,7 +3,6 @@ package com.xiaoniu.finance.router;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.xiaoniu.finance.router.agent.AgentManager;
