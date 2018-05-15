@@ -20,6 +20,13 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            if (IMPORT_LOCAL == 'true') {
+                url "../repo"
+            }else{
+                url "http://172.20.31.110:8081/repository/android-release/"
+            }
+        }
     }
 }
 

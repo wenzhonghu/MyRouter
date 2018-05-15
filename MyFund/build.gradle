@@ -47,9 +47,23 @@ def readPackage() {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    annotationProcessor project(':XNProcessor')
-    implementation project(':XNRouter')
-    implementation project(':XNAnnotation')
+    if (Boolean.valueOf(ANNOTATION_IMPORT_AAR)) {
+        implementation "${GROUP_ID}:${ANNOTATION_ARTIFACT_ID}:${ANNOTATION_VERSION}"
+    } else {
+        implementation project(':XNAnnotation')
+    }
+
+    if (Boolean.valueOf(PROCESSOR_IMPORT_AAR)) {
+        annotationProcessor "${GROUP_ID}:${PROCESSOR_ARTIFACT_ID}:${PROCESSOR_VERSION}"
+    } else {
+        annotationProcessor project(':XNProcessor')
+    }
+
+    if (Boolean.valueOf(ROUTER_IMPORT_AAR)) {
+        implementation "${GROUP_ID}:${ROUTER_ARTIFACT_ID}:${ROUTER_VERSION}"
+    } else {
+        implementation project(':XNRouter')
+    }
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:appcompat-v7:23.4.0'

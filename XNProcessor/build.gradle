@@ -7,8 +7,24 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.apache.commons:commons-collections4:4.1'
 
-    implementation project(':XNAnnotation')
+    if (Boolean.valueOf(ANNOTATION_IMPORT_AAR)) {
+        compile "${GROUP_ID}:${ANNOTATION_ARTIFACT_ID}:${ANNOTATION_VERSION}"
+    } else {
+        implementation project(':XNAnnotation')
+    }
 }
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+ext {
+    ARTIFACT_ID = "${PROCESSOR_ARTIFACT_ID}"
+    AAR_VERSION_NAME = "${PROCESSOR_VERSION}"
+    ARTIFACT_PACKAGE = "${PROCESSOR_PACKAGE}"
+    OUTPUT_MORE_AARS = false
+}
+apply from: rootProject.file('uploadaar.gradle')

@@ -6,3 +6,15 @@ dependencies {
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+ext {
+    ARTIFACT_ID = "${ANNOTATION_ARTIFACT_ID}"
+    AAR_VERSION_NAME = "${ANNOTATION_VERSION}"
+    ARTIFACT_PACKAGE = "${ANNOTATION_PACKAGE}"
+    OUTPUT_MORE_AARS = false
+}
+apply from: rootProject.file('uploadaar.gradle')
