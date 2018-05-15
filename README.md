@@ -92,6 +92,7 @@ class FundProxyManager{
 ``` java
  XnRouter.getInstance().from(context, new XnRouterRequest.Builder().build("/fund/result"));
 ```
+
 5.2. 跳转并携带参数
 ``` java
  XnRouter.getInstance().from(context, new XnRouterRequest.Builder().build("/fund/result2")
@@ -99,6 +100,7 @@ class FundProxyManager{
 			.withLong("key1", 666L)
 			.withString("key3", "888"))
 ```
+
 5.3. 携带fragment对象
 ``` java
  XnRouterResponse response = XnRouter.getInstance().from(context,
@@ -117,6 +119,7 @@ if (response.parall()) {
 
 }
 ```
+
 5.4. 添加访问权限
 ``` java
 XnRouter.getInstance().setPermissionDeniedListener(new XnRouter.PermissionDeniedListener() {
@@ -125,8 +128,9 @@ XnRouter.getInstance().setPermissionDeniedListener(new XnRouter.PermissionDenied
                         Toast.makeText(context, "没有权限访问此地址", Toast.LENGTH_SHORT).show();
                     }
                 }).from(context, new XnRouterRequest.Builder().build("/fix/home").permission(PermissionType.ACTIVITY.getPermission()));
+
+//注:权限配置可以通过PermissionType类查看,内部维护一套可扩展性的权限规则系统
 ```
-注:权限配置可以通过PermissionType类查看,内部维护一套可扩展性的权限规则系统
 
 5.5. 调用其他模块的方法和结果
 ``` java
@@ -141,11 +145,13 @@ Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).sho
 // 新建一个跳转类用于监听Schame事件,之后直接把url传递给路由即可
 //注解跳转类实现URL跳转
 @Router(value = "xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST")
+public class OuterUrlTracker extends XnAbstractTrack {
 ```
+网页跳转代码:
 ``` javascript
 <a href="xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST?productName=bbb" >地址跳转原生界面</a>
 ```
-   AndroidManifest.xml(核心点就是运用隐式跳转的方式实现)
+AndroidManifest.xml(核心点就是运用隐式跳转的方式实现)
 
 ``` java
 片段代码:
