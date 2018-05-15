@@ -75,7 +75,7 @@ public class FixedCrossCatTracker extends XnAbstractTrack {
 App(启动的时候加载初始化各个子模块的初始化功能的总管类InitProxyManager,管理调用子模块的初始化XxxxProxyManager)
 |____Fund基金模块(实现基金模块的初始化类FundProxyManager)
 |____Fixed定期模块(实现定期模块的初始化类FixedProxyManager)
-
+``` java
 @Inject
 class FundProxyManager{
    void init(Context context){
@@ -83,6 +83,7 @@ class FundProxyManager{
        FundRouterManager.setup();
    }
 }
+```
 注:其中@Inject就是在代码编译时自动注入InitProxyManager的init(Context context) // 尽可能早，推荐在Application中初始化
 ```
 4. 发起路由操作
@@ -135,10 +136,14 @@ Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).sho
 ``` java
 代码层:
     // 新建一个跳转类用于监听Schame事件,之后直接把url传递给路由即可
-    @Router(value = "xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST")注解跳转类实现URL跳转
+    ``` java
+    //注解跳转类实现URL跳转
+    @Router(value = "xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST")
+    ```
 使用点:
+    ``` html
    <a href="xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST?productName=bbb" >地址跳转原生界面</a>
-
+   ```
 核心点就是运用隐式跳转的方式实现:
 片段代码:
             <!-- Schame -->
