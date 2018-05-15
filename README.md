@@ -29,7 +29,6 @@ V1.0.0
 
 #### 三、基础功能
 1. 添加依赖和配置
-1. 添加依赖和配置
 ``` gradle
 android {
     defaultConfig {
@@ -52,7 +51,7 @@ dependencies {
 2. 添加混淆规则(如果使用了Proguard)
 ``` 
 -keep interface * implements com.xiaoniu.finance.router.core.XnAbstractTrack
-
+```
 2. 添加注解
 ``` java
 // 在支持路由的页面上添加注解(必选)
@@ -80,7 +79,7 @@ App(启动的时候加载初始化各个子模块的初始化功能的总管类I
 @Inject
 class FundProxyManager{
    void init(Context context){
-       //此类通过Processor代码产生器自动产生此类代码(格式XxxRouterManager,其中Xxx就是gradle配置moduleName参数时)
+       //此类通过XNProcessor代码产生器自动产生此类代码(格式XxxRouterManager,其中Xxx就是gradle配置moduleName参数时)
        FundRouterManager.setup();
    }
 }
