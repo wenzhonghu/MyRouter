@@ -71,6 +71,7 @@ public class FixedCrossCatTracker extends XnAbstractTrack {
 4. 初始化路由
 由于是模块分层,因此每个模块都有对应的代码分布,而每个模块都有一个初始化功能类,在这个类的初始化过程添加进去.
 其原理:通过扫描 dex 的方式进行加载通过 gradle 插件进行自动注册
+
 App(启动的时候加载初始化各个子模块的初始化功能的总管类InitProxyManager,管理调用子模块的初始化XxxxProxyManager)
 |____Fund基金模块(实现基金模块的初始化类FundProxyManager)
 |____Fixed定期模块(实现定期模块的初始化类FixedProxyManager)
@@ -163,6 +164,7 @@ Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).sho
 1. "如何自定义权限不足的操作"
 
     这个可以通过如下代码实现:
+``` java
     XnRouter.getInstance().setPermissionDeniedListener(
     new XnRouter.PermissionDeniedListener() {
            @Override
@@ -170,7 +172,7 @@ Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).sho
                    Dialog.builder(context).show();
             }
     })
-
+```
 #### 六、其他
 
 1. 沟通和交流
