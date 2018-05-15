@@ -90,13 +90,15 @@ class FundProxyManager{
 ``` java
 // 1. 应用内简单的跳转(通过URL跳转在'进阶用法'中)
  XnRouter.getInstance().from(context, new XnRouterRequest.Builder().build("/fund/result"));
-
+```
+``` java
 // 2. 跳转并携带参数
  XnRouter.getInstance().from(context, new XnRouterRequest.Builder().build("/fund/result2")
              .withInt("request", REQ_CODE)
 			.withLong("key1", 666L)
 			.withString("key3", "888"))
-
+```
+``` java
 //3. 携带fragment对象
  XnRouterResponse response = XnRouter.getInstance().from(context,
                         new XnRouterRequest.Builder().build("/fixed/fragment")
@@ -113,7 +115,8 @@ if (response.parall()) {
             transaction.commit();
 
 }
-
+```
+``` java
 //4. 添加访问权限
 XnRouter.getInstance().setPermissionDeniedListener(new XnRouter.PermissionDeniedListener() {
                     @Override
@@ -123,8 +126,9 @@ XnRouter.getInstance().setPermissionDeniedListener(new XnRouter.PermissionDenied
                 }).from(context, new XnRouterRequest.Builder().build("/fix/home").permission(PermissionType.ACTIVITY.getPermission()));
 
 注:权限配置可以通过PermissionType类查看,内部维护一套可扩展性的权限规则系统
-
-//4. 调用其他模块的方法和结果
+```
+``` java
+//5. 调用其他模块的方法和结果
 XnRouterResponse response = XnRouter.getInstance().from(context, new XnRouterRequest.Builder().build("/fixed/sum")
                         .withInt("count", Integer.parseInt(et.getText().toString()));
 Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).show();
@@ -143,7 +147,8 @@ Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).sho
 使用点:
     ``` html
    <a href="xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST?productName=bbb" >地址跳转原生界面</a>
-   ```
+    ```
+    ``` java
 核心点就是运用隐式跳转的方式实现:
 片段代码:
             <!-- Schame -->
@@ -159,7 +164,7 @@ Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).sho
             </intent-filter>
 
 注:目前android:host和android:scheme写死,如果需要符合自己条件请修改打包
-
+ ```
 ```
 
 #### 五、Q&A
