@@ -7,7 +7,7 @@ Android平台中对页面、原生路由功能的中间件，我的目标是 —
 V1.0.0
 
 #### Demo展示
-
+![avatar](https://github.com/wenzhonghu/MyRouter/tree/master/demo/router.gif)
 ##### [Demo apk下载](https://github.com/wenzhonghu/MyRouter/tree/master/demo/myrouter-1.0.0.apk)、[Demo Gif](https://github.com/wenzhonghu/MyRouter/tree/master/demo/router.gif)
 
 #### 一、功能介绍
