@@ -71,6 +71,7 @@ public class FixedCrossCatTracker extends XnAbstractTrack {
 4. 初始化路由
 由于是模块分层,因此每个模块都有对应的代码分布,而每个模块都有一个初始化功能类,在这个类的初始化过程添加进去.
 其原理:通过扫描 dex 的方式进行加载通过 gradle 插件进行自动注册
+
 App(启动的时候加载初始化各个子模块的初始化功能的总管类InitProxyManager,管理调用子模块的初始化XxxxProxyManager)
 |____Fund基金模块(实现基金模块的初始化类FundProxyManager)
 |____Fixed定期模块(实现定期模块的初始化类FixedProxyManager)
@@ -123,18 +124,20 @@ if (response.parall()) {
 5.4. 添加访问权限
 ``` java
 XnRouter.getInstance().setPermissionDeniedListener(new XnRouter.PermissionDeniedListener() {
-                    @Override
-                    public void onPermissionDenied(Context context) {
-                        Toast.makeText(context, "没有权限访问此地址", Toast.LENGTH_SHORT).show();
-                    }
-                }).from(context, new XnRouterRequest.Builder().build("/fix/home").permission(PermissionType.ACTIVITY.getPermission()));
+    @Override
+    public void onPermissionDenied(Context context) {
+        Toast.makeText(context, "没有权限访问此地址", Toast.LENGTH_SHORT).show();
+    }
+}).from(context, new XnRouterRequest.Builder().build("/fix/home")
+.permission(PermissionType.ACTIVITY.getPermission()));
 
 //注:权限配置可以通过PermissionType类查看,内部维护一套可扩展性的权限规则系统
 ```
 
 5.5. 调用其他模块的方法和结果
 ``` java
-XnRouterResponse response = XnRouter.getInstance().from(context, new XnRouterRequest.Builder().build("/fixed/sum")
+XnRouterResponse response =
+XnRouter.getInstance().from(context, new XnRouterRequest.Builder().build("/fixed/sum")
                         .withInt("count", Integer.parseInt(et.getText().toString()));
 Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).show();
 ```
