@@ -69,6 +69,7 @@ public class FixedCrossCatTracker extends XnAbstractTrack {
 
 
 4. 初始化路由
+```
 由于是模块分层,因此每个模块都有对应的代码分布,而每个模块都有一个初始化功能类,在这个类的初始化过程添加进去.
 其原理:通过扫描 dex 的方式进行加载通过 gradle 插件进行自动注册
 App(启动的时候加载初始化各个子模块的初始化功能的总管类InitProxyManager,管理调用子模块的初始化XxxxProxyManager)
@@ -85,7 +86,7 @@ class FundProxyManager{
 }
 ```
 注:其中@Inject就是在代码编译时自动注入InitProxyManager的init(Context context) // 尽可能早，推荐在Application中初始化
-
+```
 5. **发起路由操作**
 
 5.1  应用内简单的跳转(通过URL跳转在'进阶用法'中)
