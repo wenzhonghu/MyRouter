@@ -75,7 +75,7 @@ public class FixedCrossCatTracker extends XnAbstractTrack {
 App(启动的时候加载初始化各个子模块的初始化功能的总管类InitProxyManager,管理调用子模块的初始化XxxxProxyManager)
 |____Fund基金模块(实现基金模块的初始化类FundProxyManager)
 |____Fixed定期模块(实现定期模块的初始化类FixedProxyManager)
-
+```
 ``` java
 @Inject
 class FundProxyManager{
@@ -86,7 +86,7 @@ class FundProxyManager{
 }
 ```
 注:其中@Inject就是在代码编译时自动注入InitProxyManager的init(Context context) // 尽可能早，推荐在Application中初始化
-```
+
 5. **发起路由操作**
 
 5.1  应用内简单的跳转(通过URL跳转在'进阶用法'中)
