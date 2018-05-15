@@ -145,7 +145,7 @@ Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).sho
     @Router(value = "xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST")
     ```
 使用点:
-    ``` html
+    ``` java
    <a href="xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST?productName=bbb" >地址跳转原生界面</a>
     ```
     ``` java
