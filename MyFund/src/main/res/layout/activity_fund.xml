@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="startactivity"
-        android:textColor="#ffcc0000" />
+        android:textColor="#ffff" />
 
     <Button
         android:id="@+id/btn2"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="本内部startactivityforresult"
-        android:textColor="#ffcc0000" />
+        android:textColor="#ffff" />
 
     <Button
         android:id="@+id/btn21"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="调用其他模块的startactivityforresult"
-        android:textColor="#ffcc0000" />
+        android:textColor="#ffff" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:text="执行其他模块的方法(包括传参和结果)"
-            android:textColor="#ffcc0000" />
+            android:textColor="#ffff" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:text="测试请求对象池的效率"
-            android:textColor="#ffcc0000" />
+            android:textColor="#ffff" />
     </LinearLayout>
 
     <Button
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="获取其他模块的对象"
-        android:textColor="#ffcc0000" />
+        android:textColor="#ffff" />
 
     <Button
         android:id="@+id/btn5"
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="跨进程访问activity"
-        android:textColor="#ffcc0000" />
+        android:textColor="#ffff" />
 
     <LinearLayout
         android:id="@+id/contrainter"
