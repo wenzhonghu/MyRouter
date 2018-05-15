@@ -139,8 +139,8 @@ Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).sho
 1. 通过URL跳转
 ``` java
 代码层:
-    // 新建一个跳转类用于监听Schame事件,之后直接把url传递给路由即可
     ``` java
+    // 新建一个跳转类用于监听Schame事件,之后直接把url传递给路由即可
     //注解跳转类实现URL跳转
     @Router(value = "xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST")
     ```
@@ -164,20 +164,20 @@ Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).sho
             </intent-filter>
 
 注:目前android:host和android:scheme写死,如果需要符合自己条件请修改打包
- ```
+    ```
 ```
 
 #### 五、Q&A
 1. "如何自定义权限不足的操作"
-
+    ``` java
     这个可以通过XnRouter.getInstance().setPermissionDeniedListener(
     new XnRouter.PermissionDeniedListener() {
                         @Override
                         public void onPermissionDenied(Context context) {
-                            Toast.makeText(context, "没有权限访问此地址", Toast.LENGTH_SHORT).show();
+                            Dialog.builder(context).show();
                         }
     })
-
+    ```
 #### 六、其他
 
 1. 沟通和交流
