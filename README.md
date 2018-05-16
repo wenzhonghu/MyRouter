@@ -151,12 +151,12 @@ XnRouter.isDebug = true;
 ``` java
 // 新建一个跳转类用于监听Schame事件,之后直接把url传递给路由即可
 //注解跳转类实现URL跳转
-@Router(value = "xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST")
+@Router(value = "xnoapp://xno.cn/fund/list")
 public class OuterUrlTracker extends XnAbstractTrack {
 ```
 网页跳转代码:
 ``` javascript
-<a href="xnoapp://xno.cn/INVESTMENT_CATEGORY_LIST?productName=bbb" >地址跳转原生界面</a>
+<a href="xnoapp://xno.cn/fund/list?type=bbb" >地址跳转原生界面</a>
 ```
 AndroidManifest.xml(核心点就是运用隐式跳转的方式实现)
 
