@@ -3,15 +3,16 @@ package com.xiaoniu.finance.router;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.xiaoniu.finance.router.agent.AgentManager;
 import com.xiaoniu.finance.router.core.XnAbstractTrack;
 import com.xiaoniu.finance.router.core.XnRouteMeta;
+import com.xiaoniu.finance.router.core.XnRouterException;
 import com.xiaoniu.finance.router.core.XnRouterRequest;
 import com.xiaoniu.finance.router.core.XnRouterResponse;
 import com.xiaoniu.finance.router.core.XnRouterRule;
-import com.xiaoniu.finance.router.permission.PermissionManager;
 import com.xiaoniu.finance.router.result.XnResultCode;
 import com.xiaoniu.finance.router.result.XnRouterResult;
 import com.xiaoniu.finance.router.rule.RuleManager;
@@ -29,6 +30,7 @@ public class XnRouter {
 
     private volatile static XnRouter sInstance = null;
     private ConcurrentHashMap<String, XnRouteMeta> mTracks = null;
+    public volatile static boolean isDebug = false;
 
     private XnRouter() {
         mTracks = new ConcurrentHashMap<>();
@@ -83,24 +85,32 @@ public class XnRouter {
     private XnRouterResponse from(Context context, @NonNull XnRouterRequest routerRequest) {
         //long starttime = System.currentTimeMillis();
         /**
-         * 1/查询目标XnAbstractTrack
+         * 1/查询路由以及路由规则匹配体系执行
          */
         XnAbstractTrack targetTrace = findAndRouterRule(context, routerRequest);
-        if (targetTrace == null) {
-            String error = String.format("%s dont find XnAbstractTrack, pls use @Router inject it", routerRequest.getPath());
-            return XnRouterResponse.build(CODE_NOT_FOUND, error, null);
+        if (targetTrace == null || targetTrace instanceof XnRouterException) {
+            routerRequest.recycle();
+            if (targetTrace == null) {
+                String error = String.format("%s don't find XnAbstractTrack, pls use @Router inject it", routerRequest.getPath());
+                logD(error);
+                return XnRouterResponse.build(CODE_NOT_FOUND, error, null);
+            }
+            XnRouterException e = (XnRouterException) targetTrace;
+            logD(String.format("code=%s,msg=%s", e.mCode, e.mMessage));
+            return XnRouterResponse.build(e.mCode, e.mMessage, null);
         }
+
         /**
          * 2/组装参数
          */
         Object attachment = routerRequest.getAndClearObject();
         Bundle data = (Bundle) routerRequest.getData().clone();
-        //Log.d(TAG, "find Track start: " + System.currentTimeMillis());
+        logD("find Track start: " + System.currentTimeMillis());
         /**使用完毕回收到对象池中*/
-        //Log.e(TAG, "obtain="+routerRequest.toString());
+        logD("obtain=" + routerRequest.toString());
         routerRequest.recycle();
-        //Log.e(TAG, "recycle="+routerRequest.toString());
-        //Log.d(TAG, "find Track end: " + System.currentTimeMillis());
+        logD("recycle=" + routerRequest.toString());
+        logD("find Track end: " + System.currentTimeMillis());
         /**
          * 3/同步调用直接返回结果
          */
@@ -116,8 +126,13 @@ public class XnRouter {
          * 5/返回调用响应结果
          */
         XnRouterResponse routerResponse = XnRouterResponse.build(result.getCode(), result.getMsg(), result.getObject());
-        //Log.d(TAG, "end: " + (System.currentTimeMillis() -starttime));
         return routerResponse;
+    }
+
+    private static void logD(String msg) {
+        if (isDebug) {
+            Log.d(TAG, msg);
+        }
     }
 
     private void agentResult(XnRouterResult result) {

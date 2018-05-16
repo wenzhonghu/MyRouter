@@ -9,9 +9,9 @@
   <name>xncorelib</name>
   <dependencies>
     <dependency>
-      <groupId>com.xiaoniu.corelib</groupId>
-      <artifactId>xnannotation</artifactId>
-      <version>1.0.0</version>
+      <groupId>MyRouter</groupId>
+      <artifactId>XNAnnotation</artifactId>
+      <version>unspecified</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

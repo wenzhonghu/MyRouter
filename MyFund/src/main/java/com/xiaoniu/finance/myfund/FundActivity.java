@@ -43,7 +43,7 @@ public class FundActivity extends Activity {
                     public void onPermissionDenied(Context context) {
                         Toast.makeText(context, "没有权限访问此地址", Toast.LENGTH_SHORT).show();
                     }
-                }).from(FundActivity.this, new XnRouterRequest.Builder().build("/fix/home").permission(PermissionType.ACTIVITY.getPermission()));
+                }).from(FundActivity.this, new XnRouterRequest.Builder().build("/fix/home").permission(PermissionType.INNER_ACTIVITY.getPermission()));
             }
         });
 
@@ -55,7 +55,7 @@ public class FundActivity extends Activity {
             public void onClick(View v) {
                 XnRouter.getInstance().from(FundActivity.this, new XnRouterRequest.Builder().build("/fixed/result")
                         .withInt("request", REQ_CODE)
-                        .permission(PermissionType.ACTIVITY.getPermission()));
+                        .permission(PermissionType.MODULE.getPermission()));
             }
         });
 
@@ -67,7 +67,7 @@ public class FundActivity extends Activity {
             public void onClick(View v) {
                 XnRouter.getInstance().from(FundActivity.this, new XnRouterRequest.Builder().build("/fund/result")
                         .withInt("request", REQ_CODE)
-                        .permission(PermissionType.ACTIVITY.getPermission()));
+                        .permission(PermissionType.MODULE.getPermission()));
             }
         });
 
@@ -80,7 +80,7 @@ public class FundActivity extends Activity {
             public void onClick(View v) {
                 XnRouterResponse response = XnRouter.getInstance().from(FundActivity.this, new XnRouterRequest.Builder().build("/fixed/sumfixed")
                         .withInt("count", Integer.parseInt(et.getText().toString()))
-                        .permission(PermissionType.ACTIVITY.getPermission()));
+                        .permission(PermissionType.MODULE.getPermission()));
                 Toast.makeText(FundActivity.this, (int) response.getObject() + "", Toast.LENGTH_SHORT).show();
             }
         });
@@ -94,7 +94,7 @@ public class FundActivity extends Activity {
                     long x = System.currentTimeMillis();
                     XnRouter.getInstance().from(FundActivity.this, new XnRouterRequest.Builder().build("/fixed/sumfixed")
                             .withInt("count", i)
-                            .permission(PermissionType.ACTIVITY.getPermission()));
+                            .permission(PermissionType.MODULE.getPermission()));
                     Log.e("wzh", "count="+(System.currentTimeMillis() - x));
                     try {
                         Thread.sleep(20);
@@ -117,7 +117,7 @@ public class FundActivity extends Activity {
                 XnRouterResponse response = XnRouter.getInstance().from(FundActivity.this, new XnRouterRequest.Builder().build("/fixed/fragment")
                         .withString("one", "onesssssssssssssss")
                         .withString("two", "two0000ooooooooooo")
-                        .permission(PermissionType.ACTIVITY.getPermission()));
+                        .permission(PermissionType.MODULE.getPermission()));
                 if (response.parall()) {
                     Fragment fragment = (Fragment) response.getObject();
                     //步骤一：添加一个FragmentTransaction的实例

@@ -12,8 +12,8 @@ import com.xiaoniu.finance.router.result.XnRouterResult;
 public class XnRouterException extends XnAbstractTrack {
 
     private static final String DEFAULT_MESSAGE = "error";
-    private int mCode;
-    private String mMessage;
+    public final int mCode;
+    public final String mMessage;
 
     public XnRouterException() {
         mCode = XnResultCode.CODE_NOT_FOUND;
