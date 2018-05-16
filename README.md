@@ -143,7 +143,11 @@ Toast.makeText(context, (int) response.getObject() + "", Toast.LENGTH_SHORT).sho
 ```
 
 #### 四、进阶用法
-1. 通过URL跳转
+1. 打开日志信息
+``` java
+XnRouter.isDebug = true;
+```
+2. 通过URL跳转
 ``` java
 // 新建一个跳转类用于监听Schame事件,之后直接把url传递给路由即可
 //注解跳转类实现URL跳转
