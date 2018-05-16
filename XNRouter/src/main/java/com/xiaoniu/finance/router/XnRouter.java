@@ -10,6 +10,7 @@ import com.xiaoniu.finance.router.core.XnAbstractTrack;
 import com.xiaoniu.finance.router.core.XnRouteMeta;
 import com.xiaoniu.finance.router.core.XnRouterRequest;
 import com.xiaoniu.finance.router.core.XnRouterResponse;
+import com.xiaoniu.finance.router.permission.PermissionManager;
 import com.xiaoniu.finance.router.result.XnResultCode;
 import com.xiaoniu.finance.router.result.XnRouterResult;
 
@@ -187,7 +188,7 @@ public class XnRouter {
      * @return
      */
     private boolean parsePermission(final Context context, int targetPermission, int requestPermission) {
-        if (permissionPatternManager(targetPermission, requestPermission)) {
+        if (PermissionManager.getInstance().parsePermission(targetPermission, requestPermission)) {
             return true;
         }
         if (mDeniedListener != null) {

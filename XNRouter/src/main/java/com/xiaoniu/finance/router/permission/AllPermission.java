@@ -1,10 +1,13 @@
 package com.xiaoniu.finance.router.permission;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by wenzhonghu on 2018/4/28.
  */
 
-public class AllPermission  implements Permission{
+public class AllPermission extends Permission {
 
     @Override
     public PermissionType getPermission() {
@@ -17,12 +20,8 @@ public class AllPermission  implements Permission{
     }
 
     @Override
-    public PermissionType[] getChildPermission() {
-        return PermissionType.values();
+    public List<PermissionType> getChildPermission() {
+        return Arrays.asList(PermissionType.values());
     }
 
-    @Override
-    public void parsePermission() {
-
-    }
 }

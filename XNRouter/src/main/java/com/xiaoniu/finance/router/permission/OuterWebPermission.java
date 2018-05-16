@@ -1,19 +1,17 @@
 package com.xiaoniu.finance.router.permission;
 
 /**
- * Created by wenzhonghu on 2018/4/28.
+ * Created by wenzhonghu on 2018/5/16.
  */
 
-public class InnerPermission extends Permission {
+public class OuterWebPermission extends Permission {
     @Override
     public PermissionType getPermission() {
-        return PermissionType.INNER;
+        return PermissionType.OUTER_URL;
     }
 
     @Override
     public PermissionType getParentPermission() {
-        return PermissionType.ALL;
+        return PermissionType.OUTER;
     }
-
-
 }
