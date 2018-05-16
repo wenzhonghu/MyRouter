@@ -197,56 +197,6 @@ public class XnRouter {
         return false;
     }
 
-    /**
-     * 可以再次扩展,通过设计模式实现权限管理
-     *
-     * @param targetPermission
-     * @param requestPermission
-     * @return
-     */
-    private boolean permissionPatternManager(int targetPermission, int requestPermission) {
-        /**
-         * 目标权限为ALL则忽略请求权限则通过
-         */
-        if (targetPermission == 0) {
-            return true;
-        }
-        /**
-         * 目标权限为等于请求权限则通过
-         */
-        if (targetPermission == requestPermission) {
-            return true;
-        }
-        int lr = getFirstInt(targetPermission, requestPermission);
-        /**
-         * 如果相同,则权限同一级别
-         * 如果
-         */
-        if (lr == 0) {
-            if (targetPermission < requestPermission) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 判断数值的第一个数字的大小
-     *
-     * @return
-     */
-    private static int getFirstInt(int left, int right) {
-        int l = Integer.parseInt(Integer.toString(left, 16).substring(0, 1));
-        int r = Integer.parseInt(Integer.toString(right, 16).substring(0, 1));
-        if (l > r) {
-            return 1;
-        } else if (l == r) {
-            return 0;
-        } else {
-            return -1;
-        }
-    }
-
     private PermissionDeniedListener mDeniedListener = new PermissionDeniedListener() {
         @Override
         public void onPermissionDenied(Context context) {
