@@ -2,29 +2,33 @@ package com.xiaoniu.finance.router.rule;
 
 import android.content.Context;
 
+import com.xiaoniu.finance.router.core.XnAbstractTrack;
+import com.xiaoniu.finance.router.core.XnRouterException;
+import com.xiaoniu.finance.router.core.XnRouterRule;
+
+import static com.xiaoniu.finance.router.result.XnResultCode.CODE_NOT_IMPLEMENT;
+
 /**
  * Created by wenzhonghu on 2018/4/26.
  */
 
-public interface Rule<Target,Result> {
+public abstract class Rule {
     /**
-     * 添加路由规则
-     * @param pattern
-     * @param clazz
-     */
-    void addRule(final String pattern, final Class<Target> clazz);
-
-    /**
-     * 查询路由规则
-     * @param pattern
-     */
-    boolean findRule(final String pattern);
-
-    /**
-     * 执行路由规则
+     * 规则执行器
      * @param context
-     * @param pattern
+     * @param rule
      * @return
      */
-    Result invoke(final Context context, final String pattern);
+    abstract boolean doRule(Context context, XnRouterRule rule);
+
+    /**
+     * 规则异常处理
+     *
+     * @param context
+     * @param r
+     * @return
+     */
+    public XnAbstractTrack invalid(Context context, XnRouterRule r) {
+        return new XnRouterException(CODE_NOT_IMPLEMENT, "");
+    }
 }

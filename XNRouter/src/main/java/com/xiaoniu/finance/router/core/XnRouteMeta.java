@@ -10,7 +10,7 @@ public final class XnRouteMeta extends RouteMeta {
     public XnAbstractTrack action;
 
     public XnRouteMeta(String url, XnAbstractTrack action) {
-        this(url, false, PermissionType.INNER.getPermission(), false, true, action);
+        this(url, false, PermissionType.UNKNOWN.getPermission(), false, true, action);
     }
 
     public XnRouteMeta(String url, boolean enable, int permissionType, boolean crossable, boolean match, XnAbstractTrack action) {

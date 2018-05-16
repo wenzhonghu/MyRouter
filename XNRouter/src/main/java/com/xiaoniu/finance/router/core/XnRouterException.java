@@ -9,7 +9,7 @@ import com.xiaoniu.finance.router.result.XnRouterResult;
 /**
  * 业务操作异常情况
  */
-class XnRouterException extends XnAbstractTrack {
+public class XnRouterException extends XnAbstractTrack {
 
     private static final String DEFAULT_MESSAGE = "error";
     private int mCode;
@@ -20,7 +20,7 @@ class XnRouterException extends XnAbstractTrack {
         mMessage = DEFAULT_MESSAGE;
     }
 
-    XnRouterException(int code, String message) {
+    public XnRouterException(int code, String message) {
         this.mCode = code;
         this.mMessage = message;
     }

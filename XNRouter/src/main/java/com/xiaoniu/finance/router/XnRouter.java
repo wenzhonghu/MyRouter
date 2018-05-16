@@ -10,15 +10,16 @@ import com.xiaoniu.finance.router.core.XnAbstractTrack;
 import com.xiaoniu.finance.router.core.XnRouteMeta;
 import com.xiaoniu.finance.router.core.XnRouterRequest;
 import com.xiaoniu.finance.router.core.XnRouterResponse;
+import com.xiaoniu.finance.router.core.XnRouterRule;
 import com.xiaoniu.finance.router.permission.PermissionManager;
 import com.xiaoniu.finance.router.result.XnResultCode;
 import com.xiaoniu.finance.router.result.XnRouterResult;
+import com.xiaoniu.finance.router.rule.RuleManager;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import static com.xiaoniu.finance.router.result.XnResultCode.CODE_INVALID;
-import static com.xiaoniu.finance.router.result.XnResultCode.CODE_PERM_DENIED;
+import static com.xiaoniu.finance.router.result.XnResultCode.CODE_NOT_FOUND;
 
 /**
  * XnRouter中转器
@@ -27,10 +28,10 @@ public class XnRouter {
     private static final String TAG = "XnRouter";
 
     private volatile static XnRouter sInstance = null;
-    private HashMap<String, XnRouteMeta> mTracks = null;
+    private ConcurrentHashMap<String, XnRouteMeta> mTracks = null;
 
     private XnRouter() {
-        mTracks = new HashMap<>();
+        mTracks = new ConcurrentHashMap<>();
     }
 
     /**
@@ -84,7 +85,11 @@ public class XnRouter {
         /**
          * 1/查询目标XnAbstractTrack
          */
-        XnAbstractTrack targetTrace = findRequestTrack(context, routerRequest);
+        XnAbstractTrack targetTrace = findAndRouterRule(context, routerRequest);
+        if (targetTrace == null) {
+            String error = String.format("%s dont find XnAbstractTrack, pls use @Router inject it", routerRequest.getPath());
+            return XnRouterResponse.build(CODE_NOT_FOUND, error, null);
+        }
         /**
          * 2/组装参数
          */
@@ -126,38 +131,15 @@ public class XnRouter {
      * @param routerRequest
      * @return
      */
-    private XnAbstractTrack findRequestTrack(Context context, XnRouterRequest routerRequest) {
-        /**
-         * 0.匹配查询XnRouteMeta
-         */
-        XnRouteMeta targetAction = findRouteMeta(routerRequest);
+    private XnAbstractTrack findAndRouterRule(Context context, XnRouterRequest routerRequest) {
+        /**匹配查询XnRouteMeta*/
+        XnRouteMeta targetRouteMeta = findRouteMeta(routerRequest);
+        if(targetRouteMeta == null){
+            return  null;
+        }
+        XnRouterRule rule = new XnRouterRule(targetRouteMeta, routerRequest);
+        return RuleManager.getInstance().doRule(context,rule);
 
-        /**
-         * 1.如果未查询到action则异常出去
-         */
-        if (null == targetAction) {
-            return XnRouteMeta.exceptionActionCtrl(routerRequest.getPath()).action;
-        }
-        /**
-         * 2.如果是禁用则异常出去
-         */
-        if (!targetAction.isEnable()) {
-            return XnRouteMeta.exceptionActionCtrl(routerRequest.getPath(), CODE_INVALID, "invalid").action;
-        }
-        /**
-         * 3./如果是权限不足则异常出去
-         */
-        if (!parsePermission(context, targetAction.getPermissionType(), routerRequest.getPermission())) {
-            return XnRouteMeta.exceptionActionCtrl(routerRequest.getPath(), CODE_PERM_DENIED, "permissionType denied").action;
-        }
-        /**
-         * 4/如果是支持跨进程则对象跨进程处理
-         * todo
-         */
-//        if(targetAction.crossable){
-//
-//        }
-        return targetAction.action;
     }
 
     private XnRouteMeta findRouteMeta(XnRouterRequest routerRequest) {
@@ -181,21 +163,6 @@ public class XnRouter {
         return null;
     }
 
-    /**
-     * @param context
-     * @param targetPermission
-     * @param requestPermission
-     * @return
-     */
-    private boolean parsePermission(final Context context, int targetPermission, int requestPermission) {
-        if (PermissionManager.getInstance().parsePermission(targetPermission, requestPermission)) {
-            return true;
-        }
-        if (mDeniedListener != null) {
-            mDeniedListener.onPermissionDenied(context);
-        }
-        return false;
-    }
 
     private PermissionDeniedListener mDeniedListener = new PermissionDeniedListener() {
         @Override
@@ -213,6 +180,13 @@ public class XnRouter {
     public XnRouter setPermissionDeniedListener(PermissionDeniedListener listener) {
         mDeniedListener = listener;
         return this;
+    }
+
+    /**
+     * 获取权限不足情况下的回调
+     */
+    public PermissionDeniedListener getPermissionDeniedListener() {
+        return mDeniedListener;
     }
 
     public interface PermissionDeniedListener {
