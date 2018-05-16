@@ -1,6 +1,7 @@
 package com.xiaoniu.finance.router.rule;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.xiaoniu.finance.router.core.XnAbstractTrack;
 import com.xiaoniu.finance.router.core.XnRouterRule;
@@ -29,14 +30,16 @@ public class RuleManager {
     }
 
     public XnAbstractTrack doRule(Context context, XnRouterRule rule){
-        RuleContext ruleContext = new RuleContext(context);
-        addRule(ruleContext);
+        RuleContext ruleContext = addRules(context);
         return ruleContext.request(rule);
     }
 
-    private void addRule(RuleContext ruleContext) {
+    @NonNull
+    private RuleContext addRules(Context context) {
+        RuleContext ruleContext = new RuleContext(context);
         ruleContext.addRule(new RouterEnableRule());
         ruleContext.addRule(new RouterPermissionRule());
         ruleContext.addRule(new RouterCrossableRule());
+        return ruleContext;
     }
 }
