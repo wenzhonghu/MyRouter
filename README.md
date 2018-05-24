@@ -6,6 +6,13 @@ Android平台中对页面、原生路由功能的中间件，我的目标是 —
 #### 最新版本
 V1.0.0
 
+#### 同类对比
+1. **完美配套插件化的实现方案;(目前市面上路由组件都很难配套动态插件化方案)
+2. **接入和使用简单易懂;
+3. **扩展性极强,满足项目苛刻要求;
+4. **请求对象池复用;
+5. **代码简洁优美;
+
 #### Demo展示
 ![demo演示](demo/router.gif)
 ##### [Demo apk下载](https://github.com/wenzhonghu/MyRouter/tree/master/demo/myrouter-1.0.0.apk)、[Demo Gif](https://github.com/wenzhonghu/MyRouter/tree/master/demo/router.gif)
