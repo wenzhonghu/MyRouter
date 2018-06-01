@@ -52,9 +52,13 @@ android {
 dependencies {
     // 替换成最新版本, 需要注意的是api
     // 要与compiler匹配使用，均使用最新版可以保证兼容
-    compile 'com.xiaoniu.corelib:xnrouter:x.x.x'
-    annotationProcessor 'com.xiaoniu.corelib:xnprocessor:x.x.x'
+    compile 'com.xiaoniu.corelib:xnrouter:1.0.0'
+    annotationProcessor 'com.xiaoniu.corelib:xnprocessor:1.0.0'
+    compile 'com.xiaoniu.corelib:xnannotation:1.0.0'
     ...
+
+    //注意:如果模块仅仅是使用路由访问其他模块则只需要配置
+    compile 'com.xiaoniu.corelib:xnannotation:1.0.0'
 }
 ```
 2. 添加混淆规则(如果使用了Proguard)
