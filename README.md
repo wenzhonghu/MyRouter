@@ -185,51 +185,51 @@ AndroidManifest.xml(核心点就是运用隐式跳转的方式实现)
 注:目前android:host和android:scheme写死,如果需要符合自己条件请修改打包
 
 #### 五、未来规划
-1.新增线程模式
-``` java
-  ThreadMode threadMode() default ThreadMode.POSTING
+  1.新增线程模式
+  ``` java
+      ThreadMode threadMode() default ThreadMode.POSTING
 
-  public enum ThreadMode {
-      /**
-       * 在调用post所在的线程执行回调
-       */
-      POSTING,
+      public enum ThreadMode {
+          /**
+           * 在调用post所在的线程执行回调
+           */
+          POSTING,
 
-      /**
-       * 在UI线程回调
-       */
-      MAIN,
+          /**
+           * 在UI线程回调
+           */
+          MAIN,
 
-      /**
-       * 在Backgroud线程回调
-       */
-      BACKGROUND,
+          /**
+           * 在Backgroud线程回调
+           */
+          BACKGROUND,
 
-      /**
-       * 交给线程池来管理
-       */
-      ASYNC
-  }
-```
-2.完善路由权限系统
+          /**
+           * 交给线程池来管理
+           */
+          ASYNC
+      }
+      ```
+  2.完善路由权限系统
 
-3.增加模块间接口的路由调用
+  3.增加模块间接口的路由调用
 
 #### 六、Q&A
-1. "如何自定义权限不足的操作"
+  1. "如何自定义权限不足的操作"
 
-    这个可以通过如下代码实现:
-``` java
-    XnRouter.getInstance().setPermissionDeniedListener(
-    new XnRouter.PermissionDeniedListener() {
-           @Override
-            public void onPermissionDenied(Context context) {
-                   Dialog.builder(context).show();
-            }
-    })
-```
+     这个可以通过如下代码实现:
+   ``` java
+        XnRouter.getInstance().setPermissionDeniedListener(
+        new XnRouter.PermissionDeniedListener() {
+               @Override
+                public void onPermissionDenied(Context context) {
+                       Dialog.builder(context).show();
+                }
+        })
+   ```
 #### 七、其他
 
-1. 沟通和交流
+  1. 沟通和交流
 
     1. 邮箱 (wenzhonghu@qq.com)
