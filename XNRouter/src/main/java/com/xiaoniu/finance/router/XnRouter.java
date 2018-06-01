@@ -24,6 +24,7 @@ import static com.xiaoniu.finance.router.result.XnResultCode.CODE_NOT_FOUND;
 
 /**
  * XnRouter中转器
+ * @author wenzhonghu
  */
 public class XnRouter {
     private static final String TAG = "XnRouter";
@@ -55,8 +56,8 @@ public class XnRouter {
     /**
      * 注册模块
      *
-     * @param moduleName
-     * @param module
+     * @param moduleName path路径
+     * @param module path对应的业务模块
      */
     public void registerModule(String moduleName, XnRouteMeta module) {
         mTracks.put(moduleName, module);
@@ -65,10 +66,9 @@ public class XnRouter {
     /**
      * 路由跳转
      *
-     * @param context
-     * @param builder
+     * @param context 上下文
+     * @param builder 请求数据
      * @return
-     * @throws Exception
      */
     public XnRouterResponse from(Context context, @NonNull XnRouterRequest.Builder builder) {
         return from(context, builder.build());
@@ -77,10 +77,9 @@ public class XnRouter {
     /**
      * 路由跳转
      *
-     * @param context
-     * @param routerRequest
+     * @param context 上下文
+     * @param routerRequest 请求数据
      * @return
-     * @throws Exception
      */
     private XnRouterResponse from(Context context, @NonNull XnRouterRequest routerRequest) {
         //long starttime = System.currentTimeMillis();
@@ -142,8 +141,8 @@ public class XnRouter {
     /**
      * 查询目标action
      *
-     * @param context
-     * @param routerRequest
+     * @param context 上下文
+     * @param routerRequest 请求数据
      * @return
      */
     private XnAbstractTrack findAndRouterRule(Context context, XnRouterRequest routerRequest) {
@@ -157,6 +156,11 @@ public class XnRouter {
 
     }
 
+    /**
+     *  查找路由
+     * @param routerRequest 请求数据
+     * @return
+     */
     private XnRouteMeta findRouteMeta(XnRouterRequest routerRequest) {
         if (routerRequest.isMatch()) {
             return mTracks.get(routerRequest.getPath());
@@ -169,6 +173,11 @@ public class XnRouter {
         }
     }
 
+    /**
+     * 匹配path
+     * @param routerRequest 请求
+     * @return
+     */
     private String findMatchKey(XnRouterRequest routerRequest) {
         for (Map.Entry<String, XnRouteMeta> entry : mTracks.entrySet()) {
             if (entry != null && routerRequest.getPath().startsWith(entry.getKey())) {
@@ -190,7 +199,8 @@ public class XnRouter {
     /**
      * 添加权限不足情况下的回调
      *
-     * @param listener
+     * @param listener 监听器
+     * @return
      */
     public XnRouter setPermissionDeniedListener(PermissionDeniedListener listener) {
         mDeniedListener = listener;
@@ -199,6 +209,8 @@ public class XnRouter {
 
     /**
      * 获取权限不足情况下的回调
+     *
+     * @return
      */
     public PermissionDeniedListener getPermissionDeniedListener() {
         return mDeniedListener;

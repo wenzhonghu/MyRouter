@@ -290,9 +290,11 @@ public class XnRouterRequest {
         /**
          * 路由跳转的权限操作
          *
+         * See (@link com.xiaoniu.finance.router.permission.PermissionType) for permission
+         *
          * @param permission
          * @return
-         * @see (PermissionType)
+         *
          */
         public Builder permission(int permission) {
             this.mPermission = permission;

@@ -1,4 +1,5 @@
 apply plugin: 'java-library'
+//apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -11,10 +12,12 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
-ext {
-    ARTIFACT_ID = "${ANNOTATION_ARTIFACT_ID}"
-    AAR_VERSION_NAME = "${ANNOTATION_VERSION}"
-    ARTIFACT_PACKAGE = "${ANNOTATION_PACKAGE}"
-    OUTPUT_MORE_AARS = false
-}
-apply from: rootProject.file('uploadaar.gradle')
+//publish {
+//    userOrg = 'wenzhonghu'
+//    groupId = "${GROUP_ID}"
+//    artifactId = "${ANNOTATION_ARTIFACT_ID}"
+//    publishVersion = "${ANNOTATION_VERSION}"
+//    desc = 'This is a MyRouter extend library '
+//    website = 'https://github.com/wenzhonghu/MyRouter'
+//}
+

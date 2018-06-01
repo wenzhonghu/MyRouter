@@ -8,11 +8,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.0-alpha04'
-        //classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.novoda:bintray-release:+'
+        //gradlew clean build bintrayUpload -PbintrayUser=wenzhonghu -PbintrayKey=964dee6404a9d51dae1ad6f2d42cea2c3ae81e35 -PdryRun=false
     }
 }
 
@@ -20,12 +17,12 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            if (IMPORT_LOCAL == 'true') {
-                url "../repo"
-            }else{
-                url "http://172.20.31.110:8081/repository/android-release/"
-            }
+    }
+
+    tasks.withType(Javadoc) {
+        options{ encoding "UTF-8"
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
         }
     }
 }

@@ -1,4 +1,5 @@
 apply plugin: 'java-library'
+//apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -6,12 +7,7 @@ dependencies {
     compile 'com.squareup:javapoet:1.7.0'
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.apache.commons:commons-collections4:4.1'
-
-    if (Boolean.valueOf(ANNOTATION_IMPORT_AAR)) {
-        compile "${GROUP_ID}:${ANNOTATION_ARTIFACT_ID}:${ANNOTATION_VERSION}"
-    } else {
-        implementation project(':XNAnnotation')
-    }
+    compile 'com.xiaoniu.corelib:xnannotation:1.0.0'
 }
 
 sourceCompatibility = "1.7"
@@ -21,10 +17,11 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
-ext {
-    ARTIFACT_ID = "${PROCESSOR_ARTIFACT_ID}"
-    AAR_VERSION_NAME = "${PROCESSOR_VERSION}"
-    ARTIFACT_PACKAGE = "${PROCESSOR_PACKAGE}"
-    OUTPUT_MORE_AARS = false
-}
-apply from: rootProject.file('uploadaar.gradle')
+//publish {
+//    userOrg = 'wenzhonghu'
+//    groupId = "${GROUP_ID}"
+//    artifactId = "${PROCESSOR_ARTIFACT_ID}"
+//    publishVersion = "${PROCESSOR_VERSION}"
+//    desc = 'This is a MyRouter extend library'
+//    website = 'https://github.com/wenzhonghu/MyRouter'
+//}

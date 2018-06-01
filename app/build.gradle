@@ -29,9 +29,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':MyFixed')
     implementation project(':MyFund')
-    if (Boolean.valueOf(ROUTER_IMPORT_AAR)) {
-        implementation "${GROUP_ID}:${ROUTER_ARTIFACT_ID}:${ROUTER_VERSION}"
-    } else {
-        implementation project(':XNRouter')
-    }
+    compile 'com.xiaoniu.corelib:xnrouter:1.0.0'
 }

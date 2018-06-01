@@ -3,7 +3,7 @@ package com.xiaoniu.finance.router.permission;
 /**
  * Created by wenzhonghu on 2018/4/27.
  * 权限控制
- * 未来可以细分力度到具体的组件上<br/>
+ * 未来可以细分力度到具体的组件上
  * 目前通过group+perm(最后一位模)实现权限控制
  * eg:0x10000 = 1000(group)+0(perm,最小值为权限最大)
  */
