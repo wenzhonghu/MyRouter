@@ -14,7 +14,7 @@ V1.0.0
 5. 代码简洁优美;
 
 #### Demo展示
-![demo演示](demo/router.gif)
+![demo演示](demo/router.gif){:height="50%" width="50%"}
 ##### [Demo apk下载](https://github.com/wenzhonghu/MyRouter/tree/master/demo/myrouter-1.0.0.apk)、[Demo Gif](https://github.com/wenzhonghu/MyRouter/tree/master/demo/router.gif)
 
 #### 一、功能介绍
